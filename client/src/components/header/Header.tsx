@@ -11,6 +11,7 @@ import { useDisclosure } from '@chakra-ui/react';
 
 import Settings from '../settings';
 import styles from './Header.module.css';
+import MenuBar from '../menubar';
 
 function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -21,6 +22,7 @@ function Header() {
       borderBottom="1px"
       borderColor="rgba(128, 128, 128, 0.35)"
     >
+      <MenuBar />
       <img className={styles.img} src="yaade-icon.png" alt="yaade icon" />
       <Heading as="h1" size="md" ml="2">
         YAADE

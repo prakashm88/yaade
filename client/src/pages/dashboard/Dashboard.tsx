@@ -121,7 +121,7 @@ function Dashboard() {
       } else {
         window.postMessage({ type: 'ping' }, '*');
       }
-    }, 2000);
+    }, 60000);
     const getCollections = async () => {
       try {
         const response = await fetch(BASE_PATH + 'api/collection');
@@ -481,9 +481,6 @@ function Dashboard() {
 
   return (
     <div className={styles.parent}>
-      <header>
-        <Header />
-      </header>
       <div className={styles.allotment}>
         <Allotment defaultSizes={[50, 200]} snap>
           <div className={styles.sidebar}>

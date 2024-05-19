@@ -6,6 +6,7 @@ import Dashboard from './pages/dashboard';
 import Login from './pages/login';
 import theme from './theme';
 import { BASE_PATH } from './utils';
+import Home from './pages/home';
 
 const autoLogoutDurationInS = 30;
 
@@ -92,7 +93,7 @@ function AppWithUser() {
     }
   }, 1000);
 
-  return user ? <Dashboard /> : <Login />;
+  return user ? <Home /> : <Login />;
 }
 
 export default App;

@@ -41,7 +41,7 @@ const rawLeft = {
     ...kvRowRawTheme['&'],
     width: '100%',
     minWidth: '100%',
-    borderRadius: '20px 0 0 20px',
+    borderRadius: '8px 0 0 8px',
   },
 };
 
@@ -71,7 +71,7 @@ const rawRight = {
     ...kvRowRawTheme['&'],
     width: '100%',
     minWidth: '100%',
-    borderRadius: '0 20px 20px 0',
+    borderRadius: '0 8px 8px 0',
   },
 };
 

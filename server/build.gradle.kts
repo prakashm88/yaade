@@ -1,14 +1,19 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.9.23"
     id("java")
+    id("maven-publish")
 }
 
 group = "com.espero"
 version = "1.0-SNAPSHOT"
 
 val vertxVersion = "4.5.1"
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
     mavenCentral()
@@ -43,9 +48,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+
 
 tasks.withType<Jar> {
 
@@ -59,8 +62,17 @@ tasks.withType<Jar> {
     from({
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
     })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    	kotlinOptions {
+		freeCompilerArgs += "-Xjsr305=strict"
+		jvmTarget = "17"
+	}
 }
+
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
+ 

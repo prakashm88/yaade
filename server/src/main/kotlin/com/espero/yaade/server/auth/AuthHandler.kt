@@ -273,6 +273,7 @@ class AuthHandler(private val vertx: Vertx, private val daoManager: DaoManager) 
 
     private fun getUserInfo(ctx: RoutingContext) {
         val providerId = ctx.request().getParam("providerId")
+        println("providerId: $providerId")
         if (providerId == null) {
             ctx.fail(500, RuntimeException("missing providerId"))
             return
@@ -287,6 +288,8 @@ class AuthHandler(private val vertx: Vertx, private val daoManager: DaoManager) 
             ctx.fail(500, RuntimeException("missing provider configuration"))
             return
         }
+        
+        println("User: $ctx.user()")
         provider.userInfo(ctx.user())
             .onSuccess {
                 try {
@@ -305,6 +308,7 @@ class AuthHandler(private val vertx: Vertx, private val daoManager: DaoManager) 
     }
 
     private fun updateUser(config: JsonObject, ctx: RoutingContext, userInfo: JsonObject) {
+    	println("userInfo: $userInfo")
         val fields = config.getJsonObject("params")?.getJsonObject("fields")
             ?: throw RuntimeException("missing fields in provider config")
 

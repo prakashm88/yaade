@@ -55,7 +55,8 @@ function UriBar({
     ],
     theme: colorMode === 'light' ? cmThemeLight : cmThemeDark,
     value: uri,
-    style: { height: '100%' },
+    className: 'prakashurl',
+    style: { color: 'yellow' },
     placeholder: 'URL',
     indentWithTab: false,
     basicSetup: false,
@@ -85,6 +86,7 @@ function UriBar({
     <div style={{ width: 'calc(100% - 40px)' }}>
       <form className={styles.container} onSubmit={handleSubmit}>
         <select
+          style={{ height: '40px' }}
           className={cn(styles, 'select', [colorMode])}
           value={method}
           onChange={(e) => setMethod(e.target.value)}
@@ -99,8 +101,9 @@ function UriBar({
           <MethodOption method="CONNECT" />
           <MethodOption method="TRACE" />
         </select>
-        <div className={styles.cm} ref={ref} />
+        <div ref={ref} className={styles.cm} style={{ height: '56px' }} />
         <button
+          style={{ height: '40px' }}
           className={cn(styles, 'button', [colorMode])}
           disabled={uri === ''}
           type="submit"

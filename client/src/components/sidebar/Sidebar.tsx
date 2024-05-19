@@ -1,9 +1,12 @@
 import { AddIcon, HamburgerIcon } from '@chakra-ui/icons';
 import {
   Box,
+  Flex,
+  HStack,
   IconButton,
   Input,
   Select,
+  Spacer,
   Tab,
   TabList,
   TabPanel,
@@ -129,59 +132,61 @@ function Sidebar({
 
   return (
     <Box className={styles.box} bg="panelBg" h="100%" w="100%">
-      <div className={cn(styles, 'searchContainer', [colorMode])}>
-        <div className={styles.searchWithClear}>
-          <input
-            className={cn(styles, 'search', [colorMode])}
-            placeholder="Search..."
-            value={state.searchTerm}
-            onChange={(e) => setState({ ...state, searchTerm: e.target.value })}
+      <Flex>
+        <div className={cn(styles, 'searchContainer', [colorMode])}>
+          <div className={styles.searchWithClear}>
+            <input
+              className={cn(styles, 'search', [colorMode])}
+              placeholder="Search..."
+              value={state.searchTerm}
+              onChange={(e) => setState({ ...state, searchTerm: e.target.value })}
+            />
+            <button
+              className={cn(styles, 'clearSearch', [colorMode])}
+              onClick={() => setState({ ...state, searchTerm: '' })}
+            >
+              {state.searchTerm !== '' ? (
+                <svg
+                  width="12px"
+                  height="12px"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line
+                    x1="3"
+                    y1="3"
+                    x2="21"
+                    y2="21"
+                    stroke={colorMode === 'light' ? 'black' : 'white'}
+                    strokeWidth="2"
+                  />
+                  <line
+                    x1="21"
+                    y1="3"
+                    x2="3"
+                    y2="21"
+                    stroke={colorMode === 'light' ? 'black' : 'white'}
+                    strokeWidth="2"
+                  />
+                </svg>
+              ) : null}
+            </button>
+          </div>
+          <Spacer />
+          <IconButton
+            aria-label="add-collection-button"
+            icon={<AddIcon />}
+            variant="ghost"
+            onClick={onOpen}
           />
-          <button
-            className={cn(styles, 'clearSearch', [colorMode])}
-            onClick={() => setState({ ...state, searchTerm: '' })}
-          >
-            {state.searchTerm !== '' ? (
-              <svg
-                width="12px"
-                height="12px"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <line
-                  x1="3"
-                  y1="3"
-                  x2="21"
-                  y2="21"
-                  stroke={colorMode === 'light' ? 'black' : 'white'}
-                  strokeWidth="2"
-                />
-                <line
-                  x1="21"
-                  y1="3"
-                  x2="3"
-                  y2="21"
-                  stroke={colorMode === 'light' ? 'black' : 'white'}
-                  strokeWidth="2"
-                />
-              </svg>
-            ) : null}
-          </button>
+          <IconButton
+            aria-label="collapse-all-collection"
+            icon={<HamburgerIcon />}
+            variant="ghost"
+            onClick={() => dispatchCollections({ type: CollectionsActionType.CLOSE_ALL })}
+          />
         </div>
-
-        <IconButton
-          aria-label="add-collection-button"
-          icon={<AddIcon />}
-          variant="ghost"
-          onClick={onOpen}
-        />
-        <IconButton
-          aria-label="collapse-all-collection"
-          icon={<HamburgerIcon />}
-          variant="ghost"
-          onClick={() => dispatchCollections({ type: CollectionsActionType.CLOSE_ALL })}
-        />
-      </div>
+      </Flex>
 
       <Collections
         collections={filteredCollections}

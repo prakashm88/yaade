@@ -27,7 +27,7 @@ input:focus {
 
 ::-webkit-scrollbar-track {
   background: transparent;
-  border-radius: 20px;
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
